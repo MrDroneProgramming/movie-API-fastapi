@@ -26,10 +26,6 @@ class PostgresConnection():
         
     def write(self, data):
         with self.conn.cursor() as cur:
-            #Pasaos los datos de forma interpolada usando el parametro data
-            #Data (Clave/valor)
-            # INSERT INTO film(title, created_on, runtime, director, genre) 
-            # VALUES(%(title)s, %(created_on)s, %(runtime)s, %(director)s, %(genre)s)
             cur.execute("""
                         INSERT INTO film(title, created_on, runtime, director, genre) 
                         VALUES(%(title)s, %(created_on)s, %(runtime)s, %(director)s, %(genre)s)

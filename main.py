@@ -8,7 +8,7 @@ import json
 app = FastAPI()
 conn = PostgresConnection()
 
-# logger = logging(__name__)
+logger = logging(__name__)
 
 @app.get("/", status_code=HTTP_200_OK)
 def root():
