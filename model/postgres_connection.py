@@ -5,7 +5,7 @@ class PostgresConnection():
     
     def __init__(self):
         try:
-            self.conn = psycopg.connect("dbname=movie_api_fastapi user=postgres password=postgres host=localhost port=5433")
+            self.conn = psycopg.connect("dbname=movie_api_fastapi user=postgres password=POSTGRES host=localhost port=5432")
         except psycopg.OperationalError as err:
             print(err)
             self.conn.close()

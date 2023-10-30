@@ -3,12 +3,12 @@ from fastapi import FastAPI, Response
 from starlette.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT
 from model.postgres_connection import PostgresConnection
 from schema.film_schema import FilmSchema
-import json
 
 app = FastAPI()
 conn = PostgresConnection()
 
-logger = logging(__name__)
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger('myLogger')
 
 @app.get("/", status_code=HTTP_200_OK)
 def root():
