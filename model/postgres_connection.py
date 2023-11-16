@@ -24,6 +24,14 @@ class PostgresConnection():
                                """, (id,))
             return data.fetchone()
         
+    def read_all_by_genre(self, genre):
+        print("Aca tambien entra")
+        with self.conn.cursor() as cur:
+            data = cur.execute("""
+                               SELECT * FROM film WHERE genre = %s
+                               """, (genre,))
+            return data.fetchall()
+        
     def write(self, data):
         with self.conn.cursor() as cur:
             cur.execute("""
