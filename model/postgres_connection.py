@@ -5,7 +5,7 @@ class PostgresConnection():
     
     def __init__(self):
         try:
-            self.conn = psycopg.connect("dbname=movie_api_fastapi user=postgres password=postgres host=localhost port=5433")
+            self.conn = psycopg.connect("dbname=movie_api_fastapi user=postgres password=POSTGRES host=localhost port=5432")
         except psycopg.OperationalError as err:
             print(err)
             self.conn.close()
@@ -24,12 +24,16 @@ class PostgresConnection():
                                """, (id,))
             return data.fetchone()
         
+    def read_all_by_genre(self, genre):
+        print("Aca tambien entra")
+        with self.conn.cursor() as cur:
+            data = cur.execute("""
+                               SELECT * FROM film WHERE genre = %s
+                               """, (genre,))
+            return data.fetchall()
+        
     def write(self, data):
         with self.conn.cursor() as cur:
-            #Pasaos los datos de forma interpolada usando el parametro data
-            #Data (Clave/valor)
-            # INSERT INTO film(title, created_on, runtime, director, genre) 
-            # VALUES(%(title)s, %(created_on)s, %(runtime)s, %(director)s, %(genre)s)
             cur.execute("""
                         INSERT INTO film(title, created_on, runtime, director, genre) 
                         VALUES(%(title)s, %(created_on)s, %(runtime)s, %(director)s, %(genre)s)
